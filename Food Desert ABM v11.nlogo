@@ -213,8 +213,8 @@ to voronoi ;Wilensky, U. (2006). NetLogo Voronoi model.
            ;clear-all
            ;; too dark and too light are hard to distinguish from each other,
            ;; so only use 13-17, 23-27, ..., 133-137
-  set available-colors shuffle filter [(? mod 10 >= 3) and (? mod 10 <= 7)]
-  n-values 140 [?]
+  set available-colors shuffle filter [ ?1 -> (?1 mod 10 >= 3) and (?1 mod 10 <= 7) ]
+  n-values 140 [ ?1 -> ?1 ]
   set-default-shape points "circle"
   ask points [set size 0.01]
   ask patches with [supermarket-here? = TRUE] [ make-point ]
@@ -281,11 +281,11 @@ end
 to find-centroids ;code from Yang Zhou and customized by Harold Walbert
   let n 1
   foreach gis:feature-list-of censusBlocks
-  [ let center-point gis:location-of gis:centroid-of ?
+  [ ?1 -> let center-point gis:location-of gis:centroid-of ?1
     ask patch item 0 center-point item 1 center-point [
       set centroid? true
     ]
-    set n n + 1]
+    set n n + 1 ]
 end
 
 ;;This code is a modification of code from Uri Wilensky (Copyright 1998 Uri Wilensky)
@@ -378,10 +378,10 @@ end
 GRAPHICS-WINDOW
 225
 10
-738
-544
-45
-45
+736
+522
+-1
+-1
 5.53
 1
 10
@@ -484,7 +484,7 @@ radius-size
 radius-size
 0
 10
-6
+6.0
 1
 1
 NIL
@@ -745,7 +745,7 @@ BUTTON
 1107
 88
 Hide Heat Map
-ask patches [set pcolor white]\n;ask people with [accessibility > mean [accessibility] of people] [set size 2 set color green]\n;ask people with [accessibility < mean [accessibility] of people] [set size 1.5 set color yellow]\n;ask people with [(accessibility < mean [accessibility] of people) and ((pov > mean [pov] of people) or (fs > mean [fs] of people))] [set size 1 set color orange]\n;ask people with [(accessibility < mean [accessibility] of people) and ((pov > mean [pov] of people) or (fs > mean [fs] of people)) and (edu < mean [edu] of people)] [set size 0.55 set color red]\n
+ask patches [set pcolor white]\n;ask people with [accessibility > mean [accessibility] of people] [set size 2 set color green]\n;ask people with [accessibility < mean [accessibility] of people] [set size 1.5 set color yellow]\n;ask people with [(accessibility < mean [accessibility] of people) and ((pov > mean [pov] of people) or (fs > mean [fs] of people))] [set size 1 set color orange]\n;ask people with [(accessibility < mean [accessibility] of people) and ((pov > mean [pov] of people) or (fs > mean [fs] of people)) and (edu < mean [edu] of people)] [set size 0.55 set color red]
 NIL
 1
 T
@@ -762,7 +762,7 @@ INPUTBOX
 167
 253
 populationDenominator
-300
+300.0
 1
 0
 Number
@@ -776,7 +776,7 @@ education-factor
 education-factor
 0
 1
-0.5
+1.0
 0.1
 1
 NIL
@@ -1246,9 +1246,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.2.1
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -1264,7 +1263,6 @@ true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@
